@@ -1,0 +1,5 @@
+package com.assignment3.webfluxmono.nisha.repository;
+
+public interface MemberRepository {
+
+}

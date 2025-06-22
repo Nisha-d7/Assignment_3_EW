@@ -1,0 +1,24 @@
+package com.assignment3.webfluxmono.nisha.service;
+
+import com.assignment3.webfluxmono.nisha.model.Publisher;
+import com.assignment3.webfluxmono.nisha.repository.PublisherRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
+
+@Service
+@RequiredArgsConstructor
+public class PublisherService {
+	 @Autowired
+    private PublisherRepository publisherRepo;
+
+    public Mono<Publisher> addPublisher(Publisher publisher) {
+        return publisherRepo.save(publisher);
+    }
+
+    public Flux<Publisher> getAllPublishers() {
+        return publisherRepo.findAll();
+    }
+}

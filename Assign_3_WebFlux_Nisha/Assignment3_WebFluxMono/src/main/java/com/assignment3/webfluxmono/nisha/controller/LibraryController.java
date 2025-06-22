@@ -1,0 +1,60 @@
+package com.assignment3.webfluxmono.nisha.controller;
+
+import com.assignment3.webfluxmono.nisha.model.Book;
+import com.assignment3.webfluxmono.nisha.model.Member;
+import com.assignment3.webfluxmono.nisha.model.Publisher;
+import com.assignment3.webfluxmono.nisha.service.BookService;
+import com.assignment3.webfluxmono.nisha.service.MemberService;
+import com.assignment3.webfluxmono.nisha.service.PublisherService;
+import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
+import org.springframework.web.bind.annotation.*;
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
+
+@RestController
+@RequestMapping("/api/library")
+@RequiredArgsConstructor
+public class LibraryController {
+	
+	 @Autowired
+    private  BookService bookService;
+	 @Autowired
+    private PublisherService publisherService;
+	 @Autowired
+    private MemberService memberService;
+
+    // Book 
+    @PostMapping("/book")
+    public Mono<Book> createBook(@RequestBody Book book) {
+        return bookService.addBook(book);
+    }
+
+    @GetMapping("/books")
+    public Flux<Book> getBooks() {
+        return bookService.getAllBooks();
+    }
+
+    // Publisher 
+    @PostMapping("/publisher")
+    public Mono<Publisher> createPublisher(@RequestBody Publisher publisher) {
+        return publisherService.addPublisher(publisher);
+    }
+
+    @GetMapping("/publishers")
+    public Flux<Publisher> getPublishers() {
+        return publisherService.getAllPublishers();
+    }
+
+    // Member 
+    @PostMapping("/member")
+    public Mono<Member> createMember(@RequestBody Member member) {
+        return memberService.addMember(member);
+    }
+
+    @GetMapping("/members")
+    public Flux<Member> getMembers() {
+        return memberService.getAllMembers();
+    }
+}
+
